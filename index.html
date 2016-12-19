@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PROMO Tool</title>
+    <!-- set meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- include layout - bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap-treeview.css">
+    <script src="javascripts/jQuery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascripts/bootstrap-treeview.js"></script>
+    <script src="javascripts/settings.js"></script>
+    <script src="javascripts/asset.js"></script>
+
+    <script>
+      var gBackEnd = "http://localhost:8080/";
+    </script>
+
+    <!-- google fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Assistant">
+
+  </head>
+
+  <body>
+    <div class="container">
+    <!-- header -->
+    <header>
+      <div class="row">
+        <div class="col-md-6">
+          <h1>UI Configuration Tool (Promo)</h1>
+        </div>
+        <div class="col-md-6 text-right text-uppercase">
+          <h4>User Interface management and publishing</h4>
+        </div>
+      </div>
+    </header>
+
+    <hr>
+
+    <!-- status area -->
+    <section>
+      <div class="row">
+        <div class="col-md-12">
+            <p>Status</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class = "thin">
+
+    <!-- devider -->
+    <section>
+      <div>
+        <div class="col-md-3">
+          <p>VOD</p>
+          <div id="vod_menu" class="main-panel"></div>
+        </div>
+        <div id="preview" class="col-md-9">
+          <p>Preview</p>
+          <div class="preview-back main-panel-noscroll">
+            <div id='movie-strip-preview' class='movie-strip-preview'>
+              <!-- image placeholder - make sure the size is synced with .CSS-->
+              <img id='movie-strip-preview-image' src='' width=148; height=111;>
+            </div>
+            <div id='movie-strip' class='movie-strip'></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="row">
+        <div class="col-md-12">
+          <hr class = "thin">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+          <p class="centered">Copyright © 2016 Altice USA</p>
+        </div>
+        <div class="col-md-2">
+          <p class="text-right">Version 1.0.1213.1</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  </body>
+</html>
