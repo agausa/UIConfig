@@ -16,6 +16,21 @@
     <script src="javascripts/settings.js"></script>
     <script src="javascripts/asset.js"></script>
 
+    <link type="text/css" rel="Stylesheet" href="jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxrangeselector.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+       $(document).ready(function () {
+           $("#timerange").jqxRangeSelector({
+               width: 743, height: 30, min: new Date(2016, 12, 19), max: new Date(2016, 12, 26), labelsOnTicks: false,
+               range: { from: new Date(2016, 12, 21), to: new Date(2016, 12, 22) },
+               majorTicksInterval: "day", minorTicksInterval: "hour", labelsFormat: 'd', markersFormat: 'ddd, h, tt'
+           });
+       });
+    </script>
+
     <script>
       var gBackEnd = "http://localhost:8080/";
     </script>
@@ -54,7 +69,7 @@
 
     <!-- devider -->
     <section>
-      <div>
+      <div class="row">
         <div class="col-md-3">
           <p>VOD</p>
           <div id="vod_menu" class="main-panel vodCategories"></div>
@@ -70,6 +85,8 @@
               <div id='movie-strip' class='movie-strip'></div>
             </div>
           </div>
+          <!-- time range picker -->
+          <div id='timerange'></div>
         </div>
       </div>
     </section>

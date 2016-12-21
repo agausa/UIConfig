@@ -46,7 +46,7 @@ a {
 
 .main-panel {
   padding: 10px;
-  height: 550px;
+  height: 598px;
   width:290px;
   overflow-x: auto;
   overflow-y: auto;
@@ -54,7 +54,7 @@ a {
 
 div.main-panel-noscroll {
   padding: 10px;
-  height: 550px;
+  height: 480px;
 }
 
 .movie-strip-wrapper{
@@ -75,7 +75,6 @@ div.main-panel-noscroll {
   width: 100px;
   height: 75px;
   float: left;
-  /*position:absolute;*/
 }
 
 .movie-strip-preview {
@@ -89,7 +88,7 @@ div.main-panel-noscroll {
 .preview-back {
   background-image:url('../images/background.png');
   background-size:843px 480px;
-  height:680px;
+  height:600px;
   background-repeat:no-repeat;
   padding:20px
 }
