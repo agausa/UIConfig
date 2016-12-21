@@ -37,17 +37,17 @@ div.normalColor {
 }
 
 .vodCategories {
-  font: 14px "Helvetica", Helvetica, Arial, sans-serif;
-  font-size: 15;
+  font: 13px "Helvetica", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
 
-div.main-panel {
+.main-panel {
   padding: 10px;
   height: 550px;
+  width:290px;
   overflow-x: auto;
   overflow-y: auto;
 }
