@@ -57,21 +57,33 @@ div.main-panel-noscroll {
   height: 550px;
 }
 
-.movie-strip {
+.movie-strip-wrapper{
   position: absolute;
   top:398px;
   left: 219px;
   width: 620px;
-  height: 75px;
-  /*background-color: white;*/
+  overflow: auto;
 }
+
+.movie-strip {
+  width: auto; /*TODO - make auto width*/
+  height: 75px;
+}
+
+.movie-strip-asset {
+  margin-left: 5px;
+  width: 100px;
+  height: 75px;
+  float: left;
+  /*position:absolute;*/
+}
+
 .movie-strip-preview {
   position: absolute;
   top:380px;
   left: 63px;
   width: 148px;
   height: 111px;
-  /*background-color: red;*/
 }
 
 .preview-back {

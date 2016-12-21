@@ -1,7 +1,8 @@
 var gCategoryData = [];
 var expandibleTree;
 var gHost = window.location.hostname;
-
+var gStripOffsetX = 0;
+var gStripOffsetStep = 100 + 5;
 
 function getTopCategories(){
   var URL = 'http://' + gHost + '/ondemand/api/getTopCategories';
@@ -50,8 +51,6 @@ function cbGetTopCategories(categories){
 //___________________________ getCategoryDetails ______________________________
 
 function getCategoryDetails(id, node, dummy){
-  // alert(id);
-
   var request = {categoryId:id, recur:true, pageNum:1, pageSize:100};
   var reqStr = JSON.stringify(request);
 
@@ -106,8 +105,6 @@ function getCategoryDetails(id, node, dummy){
 //___________________________ getAssetDetails _________________________________
 
 function getAssetDetails(assetId){
-    //alert(id);
-    //{"id":"' . $id . '"}';
     var request = {id:assetId};
 
     $.ajax({
@@ -131,12 +128,47 @@ function getAssetDetails(assetId){
         success: function(data, textStatus, jqXHR)
         {
             var asset = data.assetDetail;
-            //$('#movie-strip-preview').append('<p>' + asset.title + '</p>');
+
             $('#movie-strip-preview-image').attr('src', gImagePath + asset.logo);
+            $('#movie-strip-preview-image').attr('onclick', 'addAsset2Strip(' + '"' + asset.logo + '"' + ',' + asset.id + ')');
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
           alert(textStatus);
         }
     });
+};
+
+//___________________________ addAsset2Strip __________________________________
+
+function addAsset2Strip(logoPath, id){
+
+  // TODO - add to DB
+
+  // check for dublicate
+  if($('#movie-strip').children('#' + id).length == 0){
+    // add
+    /*$('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" style="left:' +
+      gStripOffsetX + 'px;" onclick="removeAssetFromStrip(' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
+    */
+
+    $('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" onclick="removeAssetFromStrip(' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
+
+    // adjsut offset
+    gStripOffsetX += gStripOffsetStep;
+    $('#movie-strip').css('width', gStripOffsetX);
+  }
+};
+
+//___________________________ removeAssetFromStrip ____________________________
+
+function removeAssetFromStrip(id){
+
+  // TODO - remove from DB
+
+  $('#' + id).remove();
+  gStripOffsetX -= gStripOffsetStep;
+
+  // adjust width for scrolling part
+  $('#movie-strip').css('width', gStripOffsetX);
 };
