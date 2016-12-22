@@ -14,6 +14,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="javascripts/bootstrap-treeview.js"></script>
     <script src="javascripts/settings.js"></script>
+    <script src="javascripts/helpers.js"></script>
     <script src="javascripts/asset.js"></script>
 
     <link type="text/css" rel="Stylesheet" href="jqwidgets/styles/jqx.base.css" />
@@ -23,10 +24,21 @@
     <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
     <script type="text/javascript">
        $(document).ready(function () {
+          var today = new Date();
+
            $("#timerange").jqxRangeSelector({
-               width: 743, height: 30, min: new Date(2016, 12, 19), max: new Date(2016, 12, 26), labelsOnTicks: false,
-               range: { from: new Date(2016, 12, 21), to: new Date(2016, 12, 22) },
-               majorTicksInterval: "day", minorTicksInterval: "hour", labelsFormat: 'd', markersFormat: 'ddd, h, tt'
+               width: 743, height: 30,
+               min: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+               max: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
+               labelsOnTicks: false,
+               range: {
+                 from: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()),
+                 to: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours() + 3)
+               },
+               majorTicksInterval: "day",
+               minorTicksInterval: "hour",
+               labelsFormat: 'd',
+               markersFormat: 'ddd, h, tt'
            });
        });
     </script>
@@ -81,6 +93,8 @@
               <!-- image placeholder - make sure the size is synced with .CSS-->
               <img id='movie-strip-preview-image' src='' width=148; height=111;>
             </div>
+            <div id='ampid-on-preview-back' class='ampid-on-preview-back'>AMP ID</div>
+            <div id='ampid-on-preview' class='ampid-on-preview'>AMP ID</div>
             <div class='movie-strip-wrapper'>
               <div id='movie-strip' class='movie-strip'></div>
             </div>
@@ -103,7 +117,7 @@
           <p class="centered">Copyright © 2016 Altice USA</p>
         </div>
         <div class="col-md-2">
-          <p class="text-right">Version 1.0.1213.1</p>
+          <p class="text-right">Version 1.0.1222.1</p>
         </div>
       </div>
     </footer>

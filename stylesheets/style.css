@@ -67,14 +67,59 @@ div.main-panel-noscroll {
 
 .movie-strip {
   width: auto; /*TODO - make auto width*/
-  height: 75px;
+  height: 95px;
 }
 
 .movie-strip-asset {
   margin-left: 5px;
   width: 100px;
-  height: 75px;
+  height: 95px;
   float: left;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+
+.movie-strip-asset-time-from {
+  top:5px;
+  left: 5px;
+  width: 100px;
+  height: 10px;
+  text-align: center;
+  font: 8px "Helvetica", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.movie-strip-asset-time-to {
+  top:15px;
+  left: 5px;
+  width: 100px;
+  height: 10px;
+  text-align: center;
+  font: 8px "Helvetica", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.ampid-on-preview {
+  position: absolute;
+  top:472px;
+  left: 63px;
+  width: 148px;
+  height: 111px;
+  text-align: center;
+  font: 12px "Helvetica", Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+.ampid-on-preview-back{
+  position: absolute;
+  top:473px;
+  left: 64px;
+  width: 148px;
+  height: 111px;
+  text-align: center;
+  font: 12px "Helvetica", Helvetica, Arial, sans-serif;
+  color: black;
 }
 
 .movie-strip-preview {

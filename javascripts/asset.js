@@ -131,6 +131,8 @@ function getAssetDetails(assetId){
 
             $('#movie-strip-preview-image').attr('src', gImagePath + asset.logo);
             $('#movie-strip-preview-image').attr('onclick', 'addAsset2Strip(' + '"' + asset.logo + '"' + ',' + asset.id + ')');
+            $('#ampid-on-preview-back').text(asset.id);
+            $('#ampid-on-preview').text(asset.id);
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -147,12 +149,15 @@ function addAsset2Strip(logoPath, id){
 
   // check for dublicate
   if($('#movie-strip').children('#' + id).length == 0){
-    // add
-    /*$('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" style="left:' +
-      gStripOffsetX + 'px;" onclick="removeAssetFromStrip(' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
-    */
-
+    // add image
     $('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" onclick="removeAssetFromStrip(' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
+
+    // add time range
+    var range = $('#timerange').jqxRangeSelector('getRange');
+    var from = getDateString(range.from);
+    var to = getDateString(range.to);
+    $('#' + id).append('<div ' + 'id=' + id + '-time class="movie-strip-asset-time-from">' + from + '</div>');
+    $('#' + id).append('<div ' + 'id=' + id + '-time class="movie-strip-asset-time-to">' + to + '</div>');
 
     // adjsut offset
     gStripOffsetX += gStripOffsetStep;
@@ -165,6 +170,10 @@ function addAsset2Strip(logoPath, id){
 function removeAssetFromStrip(id){
 
   // TODO - remove from DB
+
+  // set time range
+
+  return;// don't delete for now
 
   $('#' + id).remove();
   gStripOffsetX -= gStripOffsetStep;
