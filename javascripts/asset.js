@@ -4,6 +4,8 @@ var gHost = window.location.hostname;
 var gStripOffsetX = 0;
 var gStripOffsetStep = 100 + 5;
 
+//___________________________ getTopCategories ________________________________
+
 function getTopCategories(){
   var URL = 'http://' + gHost + '/ondemand/api/getTopCategories';
   $.getJSON(URL, function(result){
@@ -14,6 +16,20 @@ function getTopCategories(){
 }
 
 getTopCategories();
+
+//___________________________ init ____________________________________________
+
+function setHighlights(){
+  // NOTE: two different divs!
+
+  $('#movie-strip-preview').mouseenter(function(){
+      $('#movie-strip-preview-plus').css('visibility','visible');
+  });
+
+  $('#movie-strip-preview-plus').mouseleave(function(){
+    $('#movie-strip-preview-plus').css('visibility','hidden');
+  });
+}
 
 //___________________________ cbGetTopCategories ______________________________
 
@@ -130,9 +146,11 @@ function getAssetDetails(assetId){
             var asset = data.assetDetail;
 
             $('#movie-strip-preview-image').attr('src', gImagePath + asset.logo);
-            $('#movie-strip-preview-image').attr('onclick', 'addAsset2Strip(' + '"' + asset.logo + '"' + ',' + asset.id + ')');
+            $('#movie-strip-preview-plus').attr('onclick', 'addAsset2Strip(' + '"' + asset.logo + '"' + ',' + asset.id + ')');
             $('#ampid-on-preview-back').text(asset.id);
             $('#ampid-on-preview').text(asset.id);
+
+            setHighlights();
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

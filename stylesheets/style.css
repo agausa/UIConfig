@@ -130,10 +130,24 @@ div.main-panel-noscroll {
   height: 111px;
 }
 
+.movie-strip-preview-plus {
+  background-color: white;
+  opacity: 0.5;
+  visibility: hidden;
+}
+
 .preview-back {
   background-image:url('../images/background.png');
   background-size:843px 480px;
   height:600px;
   background-repeat:no-repeat;
   padding:20px
+}
+
+.large-font-buttons {
+  text-align: center;
+  top: 35px;
+  font-size: 45px;
+  width: 148px;
+  height: 111px;
 }

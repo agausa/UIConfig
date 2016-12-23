@@ -1,3 +1,12 @@
+//******************************************************************************
+//
+//  helper.js
+//
+// Copyright Altice USA 2016
+//******************************************************************************
+
+//______________________ getDateString ________________________________________
+
 function getDateString (date) {
   var dateString = date.getMonth() + '/' + date.getDate() + '/';
   var shortYear = date.getFullYear() - 2000;
