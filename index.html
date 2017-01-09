@@ -25,21 +25,60 @@
     <script type="text/javascript">
        $(document).ready(function () {
           var today = new Date();
-
-           $("#timerange").jqxRangeSelector({
-               width: 743, height: 30,
-               min: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-               max: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
-               labelsOnTicks: false,
-               range: {
-                 from: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()),
-                 to: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours() + 3)
-               },
-               majorTicksInterval: "day",
-               minorTicksInterval: "hour",
-               labelsFormat: 'd',
-               markersFormat: 'ddd, h, tt'
-           });
+          $("#timerange").jqxRangeSelector({
+              width: 743, height: 30,
+              min: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+              max: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
+              labelsOnTicks: false,
+              range: {
+                from: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours()),
+                to: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours() + 3)
+              },
+              majorTicksInterval: "day",
+              minorTicksInterval: "hour",
+              labelsFormat: 'd',
+              markersFormat: 'ddd, h, tt'
+          });
+          $("#daterange").jqxRangeSelector({
+              width: 743, height: 20,
+              min: new Date(today.getFullYear(), today.getMonth(), today.getDate()-1 ),
+              max: new Date(today.getFullYear(), today.getMonth(), today.getDate()+60 ),
+              labelsOnTicks: false,
+              range: {
+                from: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                to: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+              },
+              majorTicksInterval: "month",
+              minorTicksInterval: "day",
+              resizable: false,
+              moveOnClick: true,
+              labelsFormat: 'MMM',
+              markersFormat: 'M/d/yyyy'
+          }).on('change', function(){
+              var curRange = $("#timerange").jqxRangeSelector('getRange');
+              var range = $("#daterange").jqxRangeSelector('getRange');
+              var startTime = 7;
+              var endTime = 10;
+              if(range.to > curRange.to){
+                $("#timerange").jqxRangeSelector({
+                    max: range.to,
+                    min: range.from
+                });
+              }else{
+                $("#timerange").jqxRangeSelector({
+                    min: range.from,
+                    max: range.to
+                });
+              }
+              $("#timerange").jqxRangeSelector({
+                  range: {
+                    from: new Date(range.from.getFullYear(), range.from.getMonth(), range.from.getDate(), startTime),
+                    to: new Date(range.from.getFullYear(), range.from.getMonth(), range.from.getDate(), endTime)
+                  }
+              });
+              $(".jqx-rangeselector-markers").css({ padding: 2 });
+          });
+          $(".jqx-rangeselector-markers").css({ padding: 2 });
        });
     </script>
 
@@ -58,10 +97,10 @@
     <header>
       <div class="row">
         <div class="col-md-6">
-          <h1>UI Configuration Tool (Promo)</h1>
+          <h2>UI Configuration Tool (Promo)</h2>
         </div>
         <div class="col-md-6 text-right text-uppercase">
-          <h4>User Interface management and publishing</h4>
+          <h5>User Interface management and publishing</h5>
         </div>
       </div>
     </header>
@@ -100,18 +139,49 @@
             </div>
 
             <!-- AMP ID -->
-            <div id='ampid-on-preview-back' class='ampid-on-preview-back'>AMP ID</div>
-            <div id='ampid-on-preview' class='ampid-on-preview'>AMP ID</div>
+            <div id='ampid-on-preview-back' class='ampid-on-preview-back'>Selected Asset</div>
+            <div id='ampid-on-preview' class='ampid-on-preview'>Selected Asset</div>
 
-            <div class='movie-strip-wrapper'>
-              <div id='movie-strip' class='movie-strip'></div>
+            <div id='movie-strip-wrapper' class='movie-strip-wrapper'>
+              <div id='movie-strip' class='movie-strip'>
+
+                <!-- Selection box -->
+                <div id='selected' class='selected' hidden>
+                  <img id='' src='images/select104x79.png'>
+                </div>
+
+                <!-- delete button -->
+                <div id='movie-strip-delete' class='movie-strip-delete' hidden>
+                  <span class="glyphicon glyphicon-remove-sign mid-font-buttons red"></span>
+                </div>
+              </div>
             </div>
           </div>
           <!-- time range picker -->
           <div id='timerange'></div>
+          <div id='daterange'></div>
         </div>
       </div>
     </section>
+
+    <!-- modal dialog for yes/no -->
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title" style="color:#7d97ad;">Delete Confirm</h3>
+          </div>
+          <div class="modal-body">
+            Do you want to remove asset from promo?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="modal-remove-btn" type="button" class="btn btn-primary">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <div class="row">
@@ -122,14 +192,15 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-9">
-          <p class="centered">Copyright © 2016 Altice USA</p>
+          <p class="centered">Copyright © 2017 Altice USA</p>
         </div>
         <div class="col-md-2">
-          <p class="text-right">Version 1.0.1222.1</p>
+          <p class="text-right">Version 1.0.0109.2</p>
         </div>
       </div>
     </footer>
   </div>
+
 
   </body>
   <!-- Init code below -->

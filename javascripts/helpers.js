@@ -15,9 +15,9 @@ function getDateString (date) {
 
   var time = date.getHours();
   if(time < 12){
-    dateString += time + ' am';
+    dateString += time + ':00' + ' am';
   }else {
-    dateString += (time - 12) + ' pm';
+    dateString += (time - 12) + ':00' + ' pm';
   }
 
   return dateString;

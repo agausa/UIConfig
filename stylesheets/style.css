@@ -66,18 +66,28 @@ div.main-panel-noscroll {
 }
 
 .movie-strip {
-  width: auto; /*TODO - make auto width*/
+  width: auto;
   height: 95px;
 }
 
 .movie-strip-asset {
   margin-left: 5px;
+  margin-top: 2px;
   width: 100px;
   height: 95px;
   float: left;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+}
+
+.selected {
+  margin-left: 5px;
+  float: left;
+}
+
+.movie-strip-delete{
+    float: left;
 }
 
 .movie-strip-asset-time-from {
@@ -150,4 +160,17 @@ div.main-panel-noscroll {
   font-size: 45px;
   width: 148px;
   height: 111px;
+}
+
+.mid-font-buttons {
+  text-align: right;
+  top: 5px;
+  left: 10px;
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}
+
+.red {
+  color: red;  
 }

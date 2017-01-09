@@ -1,12 +1,15 @@
 var gCategoryData = [];
 var expandibleTree;
-var gHost = window.location.hostname;
+var gHost = window.location.hostname + ':' + window.location.port;
 var gStripOffsetX = 0;
 var gStripOffsetStep = 100 + 5;
 
 //___________________________ getTopCategories ________________________________
 
 function getTopCategories(){
+
+  //alert(gHost);
+
   var URL = 'http://' + gHost + '/ondemand/api/getTopCategories';
   $.getJSON(URL, function(result){
     cbGetTopCategories(result.category);
@@ -168,7 +171,7 @@ function addAsset2Strip(logoPath, id){
   // check for dublicate
   if($('#movie-strip').children('#' + id).length == 0){
     // add image
-    $('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" onclick="removeAssetFromStrip(' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
+    $('#movie-strip').append('<div ' + 'id=' + id + ' class="movie-strip-asset" onclick="onAsset(this, ' + id + ');"' + '><img src=' + gImagePath + logoPath + ' width=100; height=75; ></div>');
 
     // add time range
     var range = $('#timerange').jqxRangeSelector('getRange');
@@ -183,15 +186,52 @@ function addAsset2Strip(logoPath, id){
   }
 };
 
-//___________________________ removeAssetFromStrip ____________________________
+//___________________________ onAsset _________________________________________
 
-function removeAssetFromStrip(id){
+function onAsset(that, id){
+  // move highlight
+  var pos = $(that).position();
+  var assetId = id;
 
-  // TODO - remove from DB
+  var offsetX = $('#movie-strip-wrapper').offset().left - $('#movie-strip').offset().left;
+
+  // move rectangle
+  $('#selected').css({'top':pos.top, 'left':pos.left + offsetX - 2, 'position': 'absolute'});
+  $('#selected').removeAttr('hidden');
+  $('#selected').show();
+
+  // move delete button
+  $('#movie-strip-delete').css({'top':pos.top, 'left':pos.left + offsetX + 58, 'position': 'absolute'});
+  $('#movie-strip-delete').removeAttr('hidden');
+  $('#movie-strip-delete').show();
+
+  // detach old handler
+  $('#movie-strip-delete').off('click');
+
+  // attach new handler
+  $('#movie-strip-delete').attr('onclick', 'ask2delete(' + '"' + assetId + '")');
 
   // set time range
+};
 
-  return;// don't delete for now
+//___________________________ ask2delete ______________________________________
+
+function ask2delete(id) {
+  $('#modal-remove-btn').attr('onclick', 'onRemove(' + '"' + id + '")');
+  $('#modalDelete').modal({
+    focus: true
+  })
+};
+
+//___________________________ onRemove ________________________________________
+
+function onRemove(id) {
+  $('#modalDelete').modal('hide');
+
+  // hide delete and highlightFirst
+
+  $('#selected').hide()
+  $('#movie-strip-delete').hide();
 
   $('#' + id).remove();
   gStripOffsetX -= gStripOffsetStep;
